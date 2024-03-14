@@ -44,30 +44,36 @@ while True:
         # Loop will break.
         if option == "q" or option == "Q" or option == "quit":
             break
-        # This is what will be printed out depending on the user's option.
-        if option == "1":
-            header =module.get_HEADER(PDB_ID)
-            print(header)
-        elif option == "2":
-            title =module.get_TITLE(PDB_ID)
-            print(title)
-        elif option == "3":
-            source = module.get_SOURCE(PDB_ID)
-            print(source)
-        elif option == "4":
-            keywords = module.get_KEYWORDS(PDB_ID)
-            print(keywords)
-        elif option == "5":
-            authors = module.get_AUTHOR(PDB_ID)
-            print(authors)
-        elif option == "6":
-            resolution = module.get_RESOLUTION(PDB_ID)
-            print(resolution)
-        elif option == "7":
-            journal_title = module.get_JRNL_TITL(PDB_ID)
-            print(journal_title)
-        else:
-            print("Error: Option chosen is not available")
+        try:
+            # This is what will be printed out depending on the user's option.
+            if option == "1":
+                header =module.get_HEADER(PDB_ID)
+                print(header)
+            elif option == "2":
+                title =module.get_TITLE(PDB_ID)
+                print(title)
+            elif option == "3":
+                source = module.get_SOURCE(PDB_ID)
+                print(source)
+            elif option == "4":
+                keywords = module.get_KEYWORDS(PDB_ID)
+                print(keywords)
+            elif option == "5":
+                authors = module.get_AUTHOR(PDB_ID)
+                print(authors)
+            elif option == "6":
+                resolution = module.get_RESOLUTION(PDB_ID)
+                print(resolution)
+            elif option == "7":
+                journal_title = module.get_JRNL_TITL(PDB_ID)
+                print(journal_title)
+            else:
+                print("Error: Option chosen is not available")
+        except ValueError:
+            print("Error. Please input a valid option")
+            # For loop will continue to run until option is given
+            continue
+
     while True:
         print_chain_options()
         
@@ -107,14 +113,14 @@ while True:
         if output == "R":
             if chain in ["A","B"] and record_type in ["ATOM","HETATM"]:
                     lines = module.relevant_lines(PDB_ID, chain, record_type)
-                    print(lines+ "\n")
+                    print(lines)
             else:
                 print("Error. Please provide a chain ID and/or record type")
         elif output == "W":
                     if chain in ["A","B"] and record_type in ["ATOM","HETATM"]:
                         lines = module.relevant_lines(PDB_ID, chain, record_type)
                         with open(f"Relevant lines for {PDB_ID}_{chain}_{record_type}", "w") as fobject:
-                                fobject.write(lines + "\n")
+                                fobject.write(lines)
                         print("Lines have been written to file")
         else:
             print("Error. Please input a chain ID (A or B) and a record_type (ATOM or HETATM)")
@@ -172,3 +178,6 @@ while True:
             break
         # utilizing the function:
         temp_fact = module.temp_factor(PDB_ID, chain, plot_dimensions, output_filename)
+        print("Plot has been saved to output_filename.")
+    else:
+        print("Error. Please check if you have made the correct inputs")
