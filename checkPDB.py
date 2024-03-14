@@ -44,6 +44,7 @@ while True:
         # Loop will break.
         if option == "q" or option == "Q" or option == "quit":
             break
+        # Adding a try-exception block in order to catch errors.
         try:
             # This is what will be printed out depending on the user's option.
             if option == "1":
@@ -84,19 +85,23 @@ while True:
         # Loop will break.
         if chain == "q" or chain == "quit" or chain == "Q":
             break
-        # This is what will be printed out.
-        if chain == "A":
-            residues = module.protein_residues(PDB_ID, chain)
-            result = module.fasta_file(PDB_ID,chain,output_filename)
-            print(residues)
-            print("Residues have been written to your file")
-        elif chain == "B":
-            residues = module.protein_residues(PDB_ID, chain)
-            result = module.fasta_file(PDB_ID,chain, output_filename)
-            print(residues)
-            print("Residues have been written to your file")
-        else:
-            print("Error.Given input is beyond range")
+        # Adding a try-exception block here.
+        try:
+            # This is what will be printed out.
+            if chain == "A":
+                residues = module.protein_residues(PDB_ID, chain)
+                result = module.fasta_file(PDB_ID,chain,output_filename)
+                print(residues)
+                print("Residues have been written to your file")
+            elif chain == "B":
+                residues = module.protein_residues(PDB_ID, chain)
+                result = module.fasta_file(PDB_ID,chain, output_filename)
+                print(residues)
+                print("Residues have been written to your file")
+            else:
+                print("Error.Given input is beyond range")
+        except ValueError:
+            print("Error. Please input a valid chain ID/output_filename")
 
 
     while True:
@@ -122,62 +127,77 @@ while True:
                         with open(f"Relevant lines for {PDB_ID}_{chain}_{record_type}", "w") as fobject:
                                 fobject.write(lines)
                         print("Lines have been written to file")
+        
+                    else:
+                        print("Error. Please input a chain ID (A or B) and a record_type (ATOM or HETATM)")
         else:
-            print("Error. Please input a chain ID (A or B) and a record_type (ATOM or HETATM)")
+            print("Error.Please input correct output (W or R)")
 
     while True:
         # Ask user to input chain of their choice in order to get the non-standard protein residues.
         chain = input("To retreive the non-standard protein residues of a particular chain, please input a chain ID:")
         if chain == "q" or chain == "Q" or chain == "quit":
             break
-        if chain in ["A","B"]:
-            non_standard_residues = module.non_standard_residues(PDB_ID, chain)
-            print(non_standard_residues)
+        try:
+            
+            if chain in ["A","B"]:
+                non_standard_residues = module.non_standard_residues(PDB_ID, chain)
+                print(non_standard_residues)
 
-        else:
-            print("Error. Please provide a chain ID")
-
-    while True:
-        print("The following prompts will allow you to change the chain ID of the structure you have downloaded")
-        # Ask user for the following inputs: input_filename, output_filename, chain and new_chain.
-        input_file = input("Please input the name of the pdb_file you have downloaded:")
-        output_file = input("Please input the name you want to give to the output file:")
-        chain = input("What chain are you wanting to alter:")
-        new_chain = input("What do you want to rename the chain to?:")
-        # Loop will break:
-        if input_file == "Q" or input_file == "quit" or input_file == "q":
-            break
-        if output_file == "q" or output_file == "quit" or output_file == "Q":
-            break
-        if chain == "Q" or chain == "quit" or chain == "q":
-            break
-        if new_chain == "Q" or new_chain == "q" or new_chain == "quit":
-            break
-        # Utilizing the function:
-        if chain in ["A", "B"]:
-            alter_structure_chain = module.alter_chain_ID(input_file, output_file, chain, new_chain)
-            # When file has been written to.
-            print("output_file has been written into.")
-        else:
-            print("Error. Please make sure all inputs are valid and try again.")
+            else:
+                print("Error. Please provide a chain ID")
+        except ValueError:
+            print("Error.Please input correct chain ID (A or B)")
 
     while True:
-        print("The following prompts will allow you to get a plot of the temperature factors of a protein given a chain ID")
-        # Ask the user for inputs.
-        chain = input("Please input a chain ID:")
-        # Breaking the loop.
-        if chain == "Q" or chain == "quit" or chain == "q":
-            break
-        plot_dimensions = input("Please put the dimensions you want the plot to have (Enclose them in round brackets):")
-        # Breaking the loop
-        if plot_dimensions == "Q" or plot_dimensions == "quit" or plot_dimensions == "q":
-            break
-        output_filename = input("Please enter a name you want the figure to be saved as:")
-        # Breaking the loop.
-        if output_filename == "Q" or output_filename == "quit" or output_filename == "q":
-            break
-        # utilizing the function:
-        temp_fact = module.temp_factor(PDB_ID, chain, plot_dimensions, output_filename)
-        print("Plot has been saved to output_filename.")
-    else:
-        print("Error. Please check if you have made the correct inputs")
+        try:
+            print("The following prompts will allow you to change the chain ID of the structure you have downloaded")
+            # Ask user for the following inputs: input_filename, output_filename, chain and new_chain.
+            input_file = input("Please input the name of the pdb_file you have downloaded:")
+            output_file = input("Please input the name you want to give to the output file:")
+            chain = input("What chain are you wanting to alter:")
+            new_chain = input("What do you want to rename the chain to?:")
+            # Loop will break:
+            if input_file == "Q" or input_file == "quit" or input_file == "q":
+                break
+            if output_file == "q" or output_file == "quit" or output_file == "Q":
+                break
+            if chain == "Q" or chain == "quit" or chain == "q":
+                break
+            if new_chain == "Q" or new_chain == "q" or new_chain == "quit":
+                break
+            # Utilizing the function:
+            if chain in ["A", "B"]:
+                alter_structure_chain = module.alter_chain_ID(input_file, output_file, chain, new_chain)
+                # When file has been written to.
+                print("output_file has been written into.")
+            else:
+                print("Error. Please make sure all inputs are valid and try again.")
+        except ValueError:
+            print("Error. Please make sure all inputs are valid")
+        except FileNotFoundError:
+            print("Error. File is not found")
+
+    while True:
+        try:
+            print("The following prompts will allow you to get a plot of the temperature factors of a protein given a chain ID")
+            # Ask the user for inputs.
+            chain = input("Please input a chain ID:")
+            # Breaking the loop.
+            if chain == "Q" or chain == "quit" or chain == "q":
+                break
+            plot_dimensions = input("Please put the dimensions you want the plot to have (Enclose them in round brackets):")
+            # Breaking the loop
+            if plot_dimensions == "Q" or plot_dimensions == "quit" or plot_dimensions == "q":
+                break
+            output_filename = input("Please enter a name you want the figure to be saved as:")
+            # Breaking the loop.
+            if output_filename == "Q" or output_filename == "quit" or output_filename == "q":
+                break
+            # utilizing the function:
+            temp_fact = module.temp_factor(PDB_ID, chain, plot_dimensions, output_filename)
+            print("Plot has been saved to output_filename.")
+            else:
+                print("Error. Please check if you have made the correct inputs")
+        except ValueError:
+            print("Error. Please ensure that your chain ID and output_filename are valid.")
