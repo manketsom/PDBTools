@@ -14,14 +14,16 @@ def pdb_download(PDB_ID):
     # This will prevent unnecessary downloading.
     if os.path.exists(PDB_file_name):
         print("The file {} is available locally, and will not be downloaded.".format(PDB_file_name))
-    # Create an url that will allow any PDB file to be downloaded
-    url = "https://files.rcsb.org/download/"+ PDB_ID + ".pdb"
-    # Request for the file and get a response.
-    response = requests.get(url)
-    # Open a file for writing the text.
-    with open(f"{PDB_file_name}", "w") as fobject:
-        fobject.write(response.text)
-        print("The file {} will be downloaded".format(PDB_file_name))
+    else:
+        
+        # Create an url that will allow any PDB file to be downloaded
+        url = "https://files.rcsb.org/download/"+ PDB_ID + ".pdb"
+        # Request for the file and get a response.
+        response = requests.get(url)
+        # Open a file for writing the text.
+        with open(f"{PDB_file_name}", "w") as fobject:
+            fobject.write(response.text)
+            print("The file {} will be downloaded".format(PDB_file_name))
 
 def get_HEADER(PDB_ID):
     """ Function retrieves the header from a specified PDB file """
