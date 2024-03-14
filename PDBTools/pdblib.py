@@ -5,9 +5,10 @@ import os
 from matplotlib import pyplot as plt
 
 def pdb_download(PDB_ID):
-    """ Function downloads a PDB file only if it unavailable locally """
+    """ Function downloads a PDB file only if it is unavailable locally.
+        It takes as input a PDB_ID and saves it to a file."""
     # Create a default directory where file is found.
-    directory = os.cwd()
+    directory = os.getcwd()
     # Create a variable that stores the filename of a given PDB ID.
     PDB_file_name = os.path.join(directory,PDB_ID + ".pdb")
     # This will prevent unnecessary downloading.
