@@ -26,7 +26,8 @@ def pdb_download(PDB_ID):
             print("The file {} will be downloaded".format(PDB_file_name))
 
 def get_HEADER(PDB_ID):
-    """ Function retrieves the header from a specified PDB file """
+    """ Function retrieves the header from a specified PDB file when given a PDB_ID as
+        an input."""
     # Url to download your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -41,7 +42,7 @@ def get_HEADER(PDB_ID):
         
 
 def get_TITLE(PDB_ID):
-    """ Function returns the title from a specified PDB file """
+    """ Function returns the title from a specified PDB file. It takes as input a PDB_ID. """
     # Url to download your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -66,7 +67,7 @@ def get_TITLE(PDB_ID):
 
 
 def get_SOURCE(PDB_ID):
-    """ Function returns the source from a specified PDB file """
+    """ Function returns the source from a PDB file when given a PDB_ID as an input. """
     # Url to download your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -90,7 +91,7 @@ def get_SOURCE(PDB_ID):
 
 
 def get_JRNL_TITL(PDB_ID):
-    """ Function returns the Journal title from a specified PDB file """
+    """ Function returns the Journal title of a PDB file when given a PDB_ID as an input. """
     # Url to download your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -113,7 +114,7 @@ def get_JRNL_TITL(PDB_ID):
 
 
 def get_KEYWORDS(PDB_ID):
-    """ Function returns the keywords from a specified PDB file """
+    """ Function returns the keywords from a PDB file when given a PDB_ID as an input. """
     # Url to download your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -128,7 +129,8 @@ def get_KEYWORDS(PDB_ID):
         
 
 def get_AUTHOR(PDB_ID):
-    """ Function returns the author of a journal that has been referenced in the pdb file """
+    """ Function returns the author of a journal that has been referenced in the pdb file. The function
+         takes a PDB_ID as an input."""
     # Url to download your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -143,7 +145,7 @@ def get_AUTHOR(PDB_ID):
     
 
 def get_RESOLUTION(PDB_ID):
-    """ Function retrieves the resolution from a specified PDB file """
+    """ Function returns the resolution of a protein from  PDB file when given a PDB_ID as an input. """
     # Url to download your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -158,7 +160,7 @@ def get_RESOLUTION(PDB_ID):
 
 def protein_residues(PDB_ID, chain):
     """ Function returns the single-letter protein residues of either Chain A or
-        Chain B"""
+        Chain B. It takes as input the PDB_ID and the chain ID."""
     # Url to download your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -167,7 +169,7 @@ def protein_residues(PDB_ID, chain):
     lines = response.text.split("\n")
     # Create a dictionary with key(three-letter residue) and value(one-letter residue):
     aa_residues = {"ALA": "A", "ARG":"R", "ASP":"D", "ASN":"N", "CYS":"C", "GLU": "E", "GLN":"Q", "GLY":"G", "HIS":"H", "ILE":"I",
-             "LEU": "L", "LYS": "K", "MET": "M", "PHE":"F", "PRO":"P", "SER":"S", "THR":"T", "TRP":"W", "TYR":"Y", "VAL":"V"}
+                   "LEU": "L", "LYS": "K", "MET": "M", "PHE":"F", "PRO":"P", "SER":"S", "THR":"T", "TRP":"W", "TYR":"Y", "VAL":"V"}
     # Create an empty string for the residues that will be printed on a single line.
     residues = ""
     # Isolating the lines starting with "ATOM" and "CA" and "chain"
@@ -181,7 +183,7 @@ def protein_residues(PDB_ID, chain):
     return residues
 
 def fasta_file(PDB_ID, chain, output_filename):
-    """ Function takes chain and output_filename as inputs and generates a FASTA-formatted file.
+    """ Function takes a PDB_ID, chain and output_filename as inputs and generates a FASTA-formatted file.
         If no chain is given, it saves each chain as an entry in a single fasta file."""
     # Need to retreive the residues that will make the sequence that is to be written in the fasta file.
     sequence = protein_residues(PDB_ID, chain)
@@ -201,8 +203,8 @@ def fasta_file(PDB_ID, chain, output_filename):
                 fobject.write(both_chains)
 
 def relevant_lines(PDB_ID,chain, record_type):
-    """ Function returns the relevant lines with given inputs of a PDB_ID, chain ID
-         and a HETATM/ATOM record type."""
+    """ Function returns the relevant lines of a protein with a specific chain. 
+         The function takes as inputs a PDB_ID, chain ID and a HETATM/ATOM record type."""
     # Url to retrieve your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
