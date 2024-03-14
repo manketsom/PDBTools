@@ -6,8 +6,10 @@ from matplotlib import pyplot as plt
 
 def pdb_download(PDB_ID):
     """ Function downloads a PDB file only if it unavailable locally """
+    # Create a default directory where file is found.
+    directory = os.cwd()
     # Create a variable that stores the filename of a given PDB ID.
-    PDB_file_name = PDB_ID + ".pdb"
+    PDB_file_name = os.path.join(directory,PDB_ID + ".pdb")
     # This will prevent unnecessary downloading.
     if os.path.exists(PDB_file_name):
         print("The file {} is available locally, and will not be downloaded.".format(PDB_file_name))
@@ -16,7 +18,7 @@ def pdb_download(PDB_ID):
     # Request for the file and get a response.
     response = requests.get(url)
     # Open a file for writing the text.
-    with open(f"{PDB_ID}", "w") as fobject:
+    with open(f"{PDB_file_name}", "w") as fobject:
         fobject.write(response.text)
         print("The file {} will be downloaded".format(PDB_file_name))
 
