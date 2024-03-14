@@ -217,10 +217,10 @@ def relevant_lines(PDB_ID,chain, record_type):
     elif record_type == "HETATM":
         pattern = "HETATM"
      # Create an empty string where all the relevant lines will be stored.
-    relevant_lines = ""
+    relevant_lines = []
     for line in lines:
         if line.startswith(pattern) and line[21:22] == chain:
-            relevant_lines+=line
+            relevant_lines.append(line)
     return relevant_lines
 
 def non_standard_residues(PDB_ID, chain):
