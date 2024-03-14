@@ -217,10 +217,10 @@ def relevant_lines(PDB_ID,chain, record_type):
     elif record_type == "HETATM":
         pattern = "HETATM"
      # Create an empty string where all the relevant lines will be stored.
-    relevant_lines = []
+    relevant_lines = ""
     for line in lines:
         if line.startswith(pattern) and line[21:22] == chain:
-            relevant_lines.append(line)
+            relevant_lines+=line
     return relevant_lines
 
 def non_standard_residues(PDB_ID, chain):
@@ -287,3 +287,5 @@ def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
     plt.title("Plot Of The Temperature Factors for Chain {}". format(chain_ID))
     # Save the plot to an output_filename:
     plt.savefig(output_filename)
+    # Open the image and view it on vim using xdg-open.
+    os.system("xdg-open", "output_filename")
