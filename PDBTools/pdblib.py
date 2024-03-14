@@ -10,7 +10,7 @@ def pdb_download(PDB_ID):
     # Create a default directory where file is found.
     directory = os.getcwd()
     # Create a variable that stores the filename of a given PDB ID.
-    PDB_file_name = os.path.join(directory,PDB_ID + ".pdb")
+    PDB_file_name = os.path.join(PDB_ID + ".pdb")
     # This will prevent unnecessary downloading.
     if os.path.exists(PDB_file_name):
         print("The file {} is available locally, and will not be downloaded.".format(PDB_file_name))
