@@ -2,6 +2,7 @@
 
 import PDBTools.pdblib as module
 import os
+
 # Create a function that will print out the options from which the user can choose from.
 def print_options():
     """ Functon prints out the options the user can choose from """
@@ -26,6 +27,10 @@ while True:
     # If user inputs the following, the loop will break.
     if PDB_ID == "q" or PDB_ID == "quit" or PDB_ID == "Q":
         break
+    # User must only input a PDB_ID with upper case.
+    if PDB_ID.islower():
+        print("Error. Please use uppercase for all characters.")
+        continue
     # Download the PDB file that is given to the input.
     try:
         if not PDB_ID:
@@ -81,7 +86,7 @@ while True:
         print_chain_options()
         
         #User will input the chain they would want to retrieve protein residues for.
-        print(" The following prompts will allow to read the protein residues of a chain ID, and save them to an output_filename")
+        print("The following prompts will allow to read the protein residues of a chain ID, and save them to an output_filename")
         chain = input("To print the protein residues of a particular chain for the PDB_ID, please input a chain ID from the given options:")
         output_filename = input("Type 'output_filename' to name your file:")
         # Loop will break.
@@ -104,6 +109,7 @@ while True:
                 print("Residues have been written to your file")
             else:
                 print("Error.Given input is not in option menu.Please refer to the option list.")
+                print("Output_filename will not be written into")
         except ValueError:
             print("Error. Please input a valid chain ID/output_filename")
 
@@ -124,7 +130,7 @@ while True:
                     lines = module.relevant_lines(PDB_ID, chain, record_type)
                     print(lines)
             else:
-                print("Error. Please provide a chain ID and/or record type")
+                print("Error.Please provide a chain ID and/or record type")
         elif output == "W":
                     if chain in ["A","B"] and record_type in ["ATOM","HETATM"]:
                         lines = module.relevant_lines(PDB_ID, chain, record_type)
@@ -190,16 +196,18 @@ while True:
             # Breaking the loop.
             if chain == "Q" or chain == "quit" or chain == "q":
                 break
+            # Ask the user for plot_dimensions
             plot_dimensions = input("Please put the dimensions you want the plot to have (Enclose them in round brackets):")
             # Breaking the loop
             if plot_dimensions == "Q" or plot_dimensions == "quit" or plot_dimensions == "q":
                 break
-            output_filename = input("Please enter a name you want the figure to be saved as:")
-            # Breaking the loop.
-            if output_filename == "Q" or output_filename == "quit" or output_filename == "q":
+            # Ask the user to name the output file.
+            output_filename = input("Please give a name to the file you want this plot to be saved in:")
+            if output_filename == "Q" or output_filename == "q" or output_filename == "quit":
                 break
             # utilizing the function:
             temp_fact = module.temp_factor(PDB_ID, chain, plot_dimensions, output_filename)
-            print("Plot has been saved to output_filename.")
+            # User will have to save the plot on their own.
+            print("Plot has been generated. Please save it")
         except ValueError:
             print("Error. Please ensure that your inputs are valid.")

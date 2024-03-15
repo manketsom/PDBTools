@@ -263,7 +263,7 @@ def alter_chain_ID(input_file, output_file, chain, new_chain):
 
 
 def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
-    """ Function takes as input a chain ID and  plot dimensions,
+    """ Function takes as input a PDB_ID, chain ID and plot dimensions,
         and plots the temperature factor of that specific chain.
         User must download the generated plot thereater. """
     # Url to retrieve your desired pdb file
@@ -289,3 +289,7 @@ def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
     plt.title("Plot Of The Temperature Factors for Chain {}". format(chain_ID))
     # Showing the graph.
     plt.show(block=True)
+    # Save the plot to an output_filename.
+    plt.savefig(output_filename)
+    # Close the plot so that nothing is tempered with.
+    plt.close()
