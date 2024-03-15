@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 import PDBTools.pdblib as module
-
+import os
 # Create a function that will print out the options from which the user can choose from.
 def print_options():
+    """ Functon prints out the options the user can choose from """
     print("Please read and decide what options you would like to choose")
     print("1  Getting the header")
     print("2  Getting the title")
@@ -14,6 +15,7 @@ def print_options():
     print("7  Getting the Journal Title")
 
 def print_chain_options():
+    """ Function prints out the chain ID options the user can choose from """
     print("The following options are for chain ID selection.")
     print("A")
     print("B")
@@ -71,7 +73,7 @@ while True:
             else:
                 print("Error: Option chosen is not available")
         except ValueError:
-            print("Error. Please input a valid option")
+            print("Error. Please input a valid, numerical option")
             # For loop will continue to run until option is given
             continue
 
@@ -99,7 +101,7 @@ while True:
                 print(residues)
                 print("Residues have been written to your file")
             else:
-                print("Error.Given input is beyond range")
+                print("Error.Given input is not in option menu.Please refer to the option list.")
         except ValueError:
             print("Error. Please input a valid chain ID/output_filename")
 
@@ -196,8 +198,9 @@ while True:
                 break
             # utilizing the function:
             temp_fact = module.temp_factor(PDB_ID, chain, plot_dimensions, output_filename)
+            os.system("xdg-open" + output_filename)
             print("Plot has been saved to output_filename.")
             else:
                 print("Error. Please check if you have made the correct inputs")
         except ValueError:
-            print("Error. Please ensure that your chain ID and output_filename are valid.")
+            print("Error. Please ensure that your inputs are valid.")
