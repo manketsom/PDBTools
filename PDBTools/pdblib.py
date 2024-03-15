@@ -263,8 +263,9 @@ def alter_chain_ID(input_file, output_file, chain, new_chain):
 
 
 def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
-    """ Function takes as input a chain ID, plot dimensions and an output_filename,
-        and plots the temperature factor of that specific chain"""
+    """ Function takes as input a chain ID and  plot dimensions,
+        and plots the temperature factor of that specific chain.
+        User must download the generated plot thereater. """
     # Url to retrieve your desired pdb file
     url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -281,12 +282,10 @@ def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
             temp_factors.append(factors)
 
     # Make the temperature plot
-    plt.figure(figsize=(plot_dimensions))
+    plt.figure(plot_dimensions)
     plt.plot(temp_factors, color="green")
     plt.xlabel("ATOM indexing")
     plt.ylabel("Temperature Factor")
     plt.title("Plot Of The Temperature Factors for Chain {}". format(chain_ID))
     # Showing the graph.
     plt.show(block=True)
-    # Save the plot to an output_filename:
-    plt.savefig(output_filename)
