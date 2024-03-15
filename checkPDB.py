@@ -87,6 +87,8 @@ while True:
         # Loop will break.
         if chain == "q" or chain == "quit" or chain == "Q":
             break
+        if output_filename == "q" or output_filename == "Q" or output_filename == "quit":
+            break
         # Adding a try-exception block here.
         try:
             # This is what will be printed out.
@@ -198,9 +200,6 @@ while True:
                 break
             # utilizing the function:
             temp_fact = module.temp_factor(PDB_ID, chain, plot_dimensions, output_filename)
-            os.system("xdg-open" + output_filename)
             print("Plot has been saved to output_filename.")
-            else:
-                print("Error. Please check if you have made the correct inputs")
         except ValueError:
             print("Error. Please ensure that your inputs are valid.")
