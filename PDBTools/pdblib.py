@@ -3,6 +3,7 @@
 import requests
 import os
 from matplotlib import pyplot as plt
+os.environ["XDG_SESSION_TYPE"] = "xcb"
 
 def pdb_download(PDB_ID):
     """ Function downloads a PDB file only if it is unavailable locally.
@@ -288,4 +289,4 @@ def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
     # Save the plot to an output_filename:
     plt.savefig(output_filename)
     # Open the image and view it on vim using xdg-open.
-    os.system("xdg-open", "output_filename")
+    os.system("xdg-open " + output_filename)
