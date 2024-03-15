@@ -281,7 +281,7 @@ def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
             temp_factors.append(factors)
 
     # Make the temperature plot
-    plt.figure(plot_dimensions)
+    plt.figure(figsize=(plot_dimensions))
     plt.plot(temp_factors, color="green")
     plt.xlabel("ATOM indexing")
     plt.ylabel("Temperature Factor")
