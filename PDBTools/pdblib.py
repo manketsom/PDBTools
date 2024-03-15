@@ -286,6 +286,8 @@ def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
     plt.xlabel("ATOM indexing")
     plt.ylabel("Temperature Factor")
     plt.title("Plot Of The Temperature Factors for Chain {}". format(chain_ID))
+    # Showing the graph.
+    plt.show(block=True)
     # Save the plot to an output_filename:
     plt.savefig(output_filename)
     # Open the image and view it on vim using xdg-open.
