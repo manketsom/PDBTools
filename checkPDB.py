@@ -110,7 +110,7 @@ while True:
                     print(residues)
                     print("Residues have been written to your file")
                 else:
-                print("Error.Protein residues for chain {} are not available".format(chain))
+                    print("Error.Protein residues for chain {} are not available".format(chain))
             else:
                 print("Error. Given input is invalid. Please refer to the option list.")
         except ValueError:
@@ -138,39 +138,45 @@ while True:
         if output == "R":
             if chain in ["A","B"] and record_type in ["ATOM","HETATM"]:
                     lines = module.relevant_lines(PDB_ID, chain, record_type)
-                    print(lines)
+                    if lines:
+                        print(lines)
+                    else:
+                        print("Error. Relevant lines not available for chain {}".format(chain))
             else:
                 print("Error.Please provide a chain ID and/or record type")
         elif output == "W":
                     if chain in ["A","B"] and record_type in ["ATOM","HETATM"]:
                         lines = module.relevant_lines(PDB_ID, chain, record_type)
-                        with open(f"Relevant lines for {PDB_ID}_{chain}_{record_type}", "w") as fobject:
-                                fobject.write(lines)
-                        print("Lines have been written to file")
+                        if lines:
+                            with open(f"Relevant lines for {PDB_ID}_{chain}_{record_type}", "w") as fobject:
+                                    fobject.write(lines)
+                            print("Lines have been written to file")
+                        else:
+                            print("Error. Relevant lines for chain {} not available. No lines written to file.".format(chain))
         
                     else:
                         print("Error. Please input a chain ID (A or B) and a record_type (ATOM or HETATM)")
         else:
             print("Error.Please input correct output (W or R)")
+            continue
 
     while True:
         # Ask user to input chain of their choice in order to get the non-standard protein residues.
         chain = input("To retreive the non-standard protein residues of a particular chain, please input a chain ID:")
         if chain == "q" or chain == "Q" or chain == "quit":
             break
-        if not chain.isupper() or not chain.isalpha():
+        if not chain.isalpha():
             print("Error.Chain_ID has to be in uppercase")
             continue
         try:
             
             if chain in ["A","B"]:
-                non_standard_residues = module.non_standard_residues(PDB_ID, chain)
-                print(non_standard_residues)
+                    non_standard_residues = module.non_standard_residues(PDB_ID, chain)
+                    if non_standard_residues:
+                        print(non_standard_residues)
 
-            else:
-                print("Error.Please provide a chain ID")
-                if non_standard_residues is None:
-                    print("Non_standard_residues for chain {} are unavailable.".format(chain))
+                    else:
+                        print("Error.Non_standard_residues for chain {} not available".format(chain))
         except ValueError:
             print("Error.Please input correct chain ID (A or B)")
 
@@ -181,11 +187,11 @@ while True:
             input_file = input("Please input the name of the pdb_file you have downloaded:")
             output_file = input("Please input the name you want to give to the output file:")
             chain = input("What chain are you wanting to alter:")
-            if not chain.isalpha() or not chain.isupper():
+            if not chain.isalpha():
                 print("Error. Chain_ID has to uppercase")
                 continue
             new_chain = input("What do you want to rename the chain to?:")
-            if not new_chain.isalpha() or not new_chain.isupper():
+            if not new_chain.isalpha():
                 print("Error.new_chain needs to be uppercase")
             # Loop will break:
             if input_file == "Q" or input_file == "quit" or input_file == "q":
@@ -213,7 +219,7 @@ while True:
             print("The following prompts will allow you to get a plot of the temperature factors of a protein given a chain ID")
             # Ask the user for inputs.
             chain = input("Please input a chain ID:")
-            if not chain.isalpha() or not chain.isupper():
+            if not chain.isalpha():
                 print("Error.Chain_ID has to be uppercase")
                 continue
             # Breaking the loop.
@@ -221,14 +227,11 @@ while True:
                 break
             # Ask the user for plot_dimensions
             plot_dimensions = input("Please put the dimensions you want the plot to have (Enclose them in round brackets):")
-            if not plot_dimensions.isnumeric():
-                print("Error.Plot_dimensions have to be numerical")
-                continue
             # Breaking the loop
             if plot_dimensions == "Q" or plot_dimensions == "quit" or plot_dimensions == "q":
                 break
             # Ask the user to name the output file.
-            output_filename = input("Please give a name to the file you want this plot to be saved in:")
+            output_filename = input("Please enter 'output_filename'")
             if output_filename == "Q" or output_filename == "q" or output_filename == "quit":
                 break
             # utilizing the function:
