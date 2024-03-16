@@ -28,7 +28,7 @@ def pdb_download(PDB_ID):
 
 def get_HEADER(PDB_ID):
     """ Function retrieves the header from a specified PDB file when given a PDB_ID as
-        an input."""
+        an input."""    
     # Url to download your desired pdb file
     pdb_url = "https://files.rcsb.org/download/" + PDB_ID + ".pdb"
     # Request to get the file and get the response.
@@ -251,7 +251,7 @@ def alter_chain_ID(input_file, output_file, chain, new_chain):
         input_lines = fobject.readlines()
 
     # Open a file to which the altered chain IDs will be written.
-    with open(output_file, "w") as fobject:
+    with open(output_file,"w") as fobject:
         for line in input_lines:
         # Structures we are altering are ATOM and HETATM.
             if line.startswith("ATOM") or line.startswith("HETATM"):
@@ -286,10 +286,10 @@ def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
     plt.plot(temp_factors, color="green")
     plt.xlabel("ATOM indexing")
     plt.ylabel("Temperature Factor")
-    plt.title("Plot Of The Temperature Factors for Chain {}". format(chain_ID))
+    plt.title("Plot Of The Temperature Factors for {} Chain {}". format(PDB_ID, chain_ID))
     # Showing the graph.
     plt.show(block=True)
     # Save the plot to an output_filename.
-    plt.savefig(output_filename)
+    plt.savefig("Plot for {} chain {}".format(PDB_ID, chain_ID))
     # Close the plot so that nothing is tempered with.
     plt.close()
