@@ -31,6 +31,11 @@ This comand will download the requests module and it will be ready to be importe
 Alternatively, you can use conda to install the `requests` module:
 `conda install requests`
 
+# Insalling other third-party modules/libraries
+This software makes use of matplotlib to create a plot for the temperature factors.
+To install matplotlib, use the following command:
+`pip install matplotlib`
+
 # Getting the software from GitHub
 To retrieve this software from GitHub and clone it on your local machine, the following actions need to be conducted:
 If you have not already, download Git and install it onto your system. Git can be downloaded from the official Git website.
