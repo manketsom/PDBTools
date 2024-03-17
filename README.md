@@ -44,7 +44,9 @@ To install matplotlib, use the following command:
 `pip install matplotlib`
 
 In order to get rid of a `libGL error` that may pop up whilst generating the temperature factor plot, use the following
-command to install a package that will sort out the error: `conda install -c conda-forge libstcdcxx-ng`
+command to install a package that will sort out the error:
+
+ `conda install -c conda-forge libstcdcxx-ng`
 
 # Getting the software from GitHub
 To retrieve this software from GitHub and clone it on your local machine, the following actions need to be conducted:
