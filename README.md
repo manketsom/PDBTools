@@ -15,25 +15,32 @@ the temperature factors of a protein and return an image of the plot.
 In order for this software to work, the user must be operating on a conda environment that supports this software.
 This software is upported by the py311 conda environment. If the user does not have this environment set up, follow the 
 prompts below to set up the environment.
+
 To create the py311 conda environment, input the following in your bash terminal:
 `conda create -n py311 conda-forge python=3.11`
-To verify if the conda environment was created, do the following in your bash terminal:
+
+To verify if the conda environment was created, input  the following in your bash terminal:
 `conda env list`
-To activate the py311 environment, do the following in your bash terminal:
+
+To activate the py311 environment, input the following in your bash terminal:
 `conda activate py311`
 
 # Installing the requests module
 The software makes use of a third-party library called `requests` which collects data from a given url and stores it in your
 current directory. To make use of this module, the user will have to install it in their terminal. To install the module, you
 can make use of the pip package by doing the following:
+
 `pip install requests`
+
 This comand will download the requests module and it will be ready to be imported by the user.
 Alternatively, you can use conda to install the `requests` module:
+
 `conda install requests`
 
 # Insalling other third-party modules/libraries
 This software makes use of matplotlib to create a plot for the temperature factors.
 To install matplotlib, use the following command:
+
 `pip install matplotlib`
 
 In order to get rid of a `libGL error` that may pop up whilst generating the temperature factor plot, use the following
