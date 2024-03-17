@@ -277,7 +277,7 @@ def temp_factor(PDB_ID, chain_ID, plot_dimensions, output_filename):
     for line in lines:
         # "ATOM" is the protein.
         if line.startswith("ATOM") and line[21:22] == chain_ID:
-            # Concvert the strings into a float type.
+            # Convert the strings into a float type.
             factors = float(line[61:66])
             temp_factors.append(factors)
 
