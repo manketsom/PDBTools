@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import PDBTools.pdblib as module
-import os
 
 # Create a function that will print out the options from which the user can choose from.
 def print_options():
