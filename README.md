@@ -8,8 +8,8 @@ and download it again. The software can also retrieve a plethora of information 
 the header, title, source, author, resolution and journal title of the PDB file, as well as the keywords of the PDB file.
 In addition to that, it can create a file with the protein residues of a particular chain and/or a file with the relevant
 lines of a specific chain. You will also get the opportunity to see the non-standard protein residues of a particular chain
-(should they be present). It can alter the chain ID of a structure and save the edited file as a new file. Finally, it can plot
-the temperature factors of a protein and return an image of the plot.
+(should they be present). It can alter the chain ID of a structure and save the edited file as a new file. Finally, it plots
+the temperature factors of a protein and returns an image of the plot.
 
 # Setting up the conda environment
 In order for this software to work, the user must be operating on a conda environment that supports this software.
